@@ -1,0 +1,22 @@
+{
+  "name": "restapi",
+  "version": "1.0.0",
+  "description": "exercise restapi",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dnedaniele/restAPI.git"
+  },
+  "author": "daniele",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dnedaniele/restAPI/issues"
+  },
+  "homepage": "https://github.com/dnedaniele/restAPI#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
