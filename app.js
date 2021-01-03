@@ -1,14 +1,14 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
-var cors = require('cors');
+var cors = require("cors");
 const Post = require("./modules/Posts");
 const Product = require("./modules/Products");
 require("dotenv").config();
 
 const app = express();
 app.use(cors());
-mongoose.connect(process.env.DB_CONNECTION, { useNewUrlParser: true }, () => {
+mongoose.connect(process.env.DB_CONNECTION, { useNewUrlParser: true, useUnifiedTopology: true }, () => {
   console.log("connected to DB!");
 });
 
@@ -69,7 +69,7 @@ app.post("/products", async (request, response) => {
   const product = new Product({
     name: request.body.name,
     image: request.body.image,
-    price: request.body.price
+    price: request.body.price,
   });
 
   try {
@@ -85,6 +85,17 @@ app.post("/products", async (request, response) => {
 app.get("/productList", async (req, res) => {
   const productList = await Product.find({}).exec();
   res.json(productList);
+});
+
+// GET single Product
+app.get("/products/:productId", async (req, res) => {
+  const productId = req.params.productId;
+  const product = await Product.findOne({ _id: productId });
+  if (!product){
+    res.status(404).end();
+  }else{
+    res.json(product);
+  }
 });
 
 //Connect to DB
